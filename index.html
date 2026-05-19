@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Bimbingan Konseling</title>
+    <style>
+        /* --- RESET & BASE STYLE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9fbfd;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- WARNA PALETTE --- */
+        :root {
+            --primary-color: #2E86AB;
+            --secondary-color: #A23B72;
+            --accent-color: #F18F01;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --whatsapp-color: #25D366;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-nav {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(135deg, #e0f7fa 0%, #f3e5f5 100%);
+            padding: 5rem 5%;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn-hero {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .btn-hero:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- FITUR / LAYANAN --- */
+        .features {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- PROFIL KONSELOR --- */
+        .profile-section {
+            background-color: var(--white);
+            padding: 4rem 5%;
+        }
+
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+        }
+
+        .profile-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .profile-content h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .profile-content h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* --- FORMULIR BOOKING --- */
+        .booking-section {
+            background-color: var(--bg-light);
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .booking-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--whatsapp-color);
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #1da851;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+            color: #ccc;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #555;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .profile-container { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                💙 BK<span>Care</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#profil">Profil Konselor</a></li>
+                <li><a href="#fitur">Layanan</a></li>
+                <li><a href="#booking" class="btn-nav">Buat Janji</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <h1>Suara Anda Didengar di Sini</h1>
+        <p>Selamat datang di layanan Bimbingan Konseling. Kami percaya setiap masalah memiliki solusi. Jangan ragu untuk bercerita, apapun yang Anda rasakan di sini aman dan rahasia.</p>
+        <a href="#booking" class="btn-hero">Mulai Konsultasi</a>
+    </section>
+
+    <!-- FITUR / LAYANAN -->
+    <section class="features" id="fitur">
+        <h2 class="section-title">Layanan Kami</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="icon">🗣️</span>
+                <h3>Konseling Individual</h3>
+                <p>Sesi curhat pribadi untuk mengatasi masalah pribadi, akademik, atau sosial dengan privasi penuh.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🚀</span>
+                <h3>Bimbingan Karir</h3>
+                <p>Bantuan menemukan minat, bakat, dan perencanaan masa depan yang tepat untuk kamu.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">👨‍👩‍👧</span>
+                <h3>Konseling Orang Tua</h3>
+                <p>Sesi konsultasi untuk orang tua dalam menghadapi tantangan pola asuh anak di rumah.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🤝</span>
+                <h3>Peer Counselor</h3>
+                <p>Program pelatihan menjadi teman cerita yang baik untuk sesama siswa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROFIL KONSELOR (FOTO KAMU) -->
+    <section class="profile-section" id="profil">
+        <div class="profile-container">
+            <!-- FOTO KAMU -->
+            <img src="https://i.postimg.cc/ZC5ByVQS/Whats-App-Image-2025-01-16-at-19-46-53.jpg" alt="Foto Konselor" class="profile-img">
+            
+            <div class="profile-content">
+                <h2>Tentang Konselor</h2>
+                <!-- GANTI NAMA KAMU DI SINI -->
+                <h4>Nama Kamu, S.Psi</h4>
+                <p>Hola! Saya adalah konselor sekolah yang siap mendengarkan segala keluh kesahmu. Dengan latar belakang Psikologi, saya berkomitmen menciptakan ruang aman bagi kalian untuk bercerita tanpa rasa takut.</p>
+                <br>
+                <p><strong>Motto:</strong> "Tidak ada masalah yang terlalu berat untuk dibicarakan." 🌟</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULIR BOOKING -->
+    <section class="booking-section" id="booking">
+        <h2 class="section-title">Buat Janji Konseling</h2>
+        <p>Isi formulir di bawah ini, lalu klik tombol untuk langsung terhubung ke WhatsApp Konselor.</p>
+        
+        <form id="wa-form">
+            <div class="form-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" placeholder="Contoh: Budi Santoso" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="kelas">Kelas / Level</label>
+                <select id="kelas">
+                    <option value="X IPS 1">X IPS 1</option>
+                    <option value="X IPA 2">X IPA 2</option>
+                    <option value="XI Bahasa">XI Bahasa</option>
+                    <option value="Guru/Ortu">Guru / Orang Tua</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="topik">Topik yang Ingin Dibahas</label>
+                <select id="topik">
+                    <option value="Masalah Akademik">📚 Masalah Akademik</option>
+                    <option value="Masalah Pribadi">💔 Masalah Pribadi</option>
+                    <option value="Masalah Sosial">🤝 Masalah Sosial</option>
+                    <option value="Perencanaan Karir">🚀 Perencanaan Karir</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="nomor">Nomor WhatsApp Kamu</label>
+                <input type="tel" id="nomor" placeholder="0812xxxxx" required>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <span>📱</span> Kirim ke WhatsApp
+            </button>
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Kontak Kami</h4>
+                <ul>
+                    <li>📍 Ruang BK Lt. 1 Gedung Utama</li>
+                    <li>📧 bksekolah@email.com</li>
+                    <li>📱 WhatsApp: 0821-8964-2817</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Jam Operasional</h4>
+                <ul>
+                    <li>Senin - Kamis: 07.00 - 15.00</li>
+                    <li>Jumat: 07.00 - 11.30</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Layanan Bimbingan Konseling
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FOR WHATSAPP -->
+    <script>
+        document.getElementById('wa-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Nomor WhatsApp Konselor
+            const nomorKonselor = "6282189642817"; 
+            
+            const nama = document.getElementById('nama').value;
+            const kelas = document.getElementById('kelas').value;
+            const topik = document.getElementById('topik').value;
+            const nomor = document.getElementById('nomor').value;
+            
+            const pesan = `Halo Kak BK, saya ingin buat janji konseling:%0A%0A*Nama:* ${nama}%0A*Kelas:* ${kelas}%0A*Topik:* ${topik}%0A*No WA:* ${nomor}%0A%0ATerima kasih.`;
+            
+            window.open(`https://wa.me/${nomorKonselor}?text=${pesan}`, '_blank');
+        });
+    </script>
+
+</body>
+</html>
